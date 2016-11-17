@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.grocery.entity.Grocery;
 import com.grocery.services.GroceryServImpl;
 
 @RestController
+@CrossOrigin(origins="http://localhost")
 public class GroceryController {
 	@Autowired
 	GroceryServImpl service;
