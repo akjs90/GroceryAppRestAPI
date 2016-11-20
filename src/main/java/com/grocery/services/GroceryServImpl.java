@@ -33,6 +33,7 @@ public class GroceryServImpl implements GroceryService {
 		if (item.getId() == null)
 			return false;
 		Grocery deletedItem = repository.findOne(item.getId());
+		System.out.println("Item to be "+deletedItem.getName());
 		if (deletedItem != null) {
 			repository.delete(item.getId());
 			return true;
@@ -58,10 +59,13 @@ public class GroceryServImpl implements GroceryService {
 	public Grocery saveItem(Grocery item) {
 		// TODO Auto-generated method stub
 		Grocery storedItem = null;
+		System.out.println("Name of item "+item.getName());
 		if (item.getId() != null)
 			storedItem = repository.findOne(item.getId());
-		if (storedItem != null) {
+		System.out.println("stored item "+storedItem);
+		if (storedItem != null || item.getName()==null) {
 			// item with same id exists
+			System.out.println("Herew ");
 			return null;
 		}
 		return repository.save(item);

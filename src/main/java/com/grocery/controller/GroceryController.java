@@ -18,7 +18,7 @@ import com.grocery.entity.Grocery;
 import com.grocery.services.GroceryServImpl;
 
 @RestController
-@CrossOrigin(origins="http://localhost")
+
 public class GroceryController {
 	@Autowired
 	GroceryServImpl service;
@@ -39,6 +39,7 @@ public class GroceryController {
 
 	@RequestMapping(value = "api/grocery", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Grocery> saveItem(@RequestBody Grocery item) {
+		System.out.println("Here in save controller");
 		Grocery savedItem = service.saveItem(item);
 		if (savedItem == null)
 			return new ResponseEntity<Grocery>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,15 +51,19 @@ public class GroceryController {
 		Grocery updatedItem = service.updateItem(item);
 		if (updatedItem == null)
 			return new ResponseEntity<Grocery>(HttpStatus.INTERNAL_SERVER_ERROR);
-		return new ResponseEntity<Grocery>(HttpStatus.OK);
+		return new ResponseEntity<Grocery>(updatedItem,HttpStatus.OK);
 
 	}
 
+	
 	@RequestMapping(value = "api/grocery", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Grocery> deleteItem(@RequestBody Grocery item) {
 		boolean deletedItem = service.deleteItem(item);
-		if (deletedItem)
+		
+		if (deletedItem){
+			System.out.println("item deleted ");
 			return new ResponseEntity<Grocery>(HttpStatus.OK);
+		}
 		return new ResponseEntity<Grocery>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
